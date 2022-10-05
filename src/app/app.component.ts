@@ -1,4 +1,4 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component } from '@angular/core';
 import { OverlayMenuService } from './overlay-menu.service';
@@ -12,7 +12,7 @@ import { OverlayComponent } from './overlay/overlay.component';
 export class AppComponent {
   constructor(private overlay: Overlay, private overlayMenu: OverlayMenuService) {}
 
-  overlayRef: any
+  overlayRef: OverlayRef | null;
 
 
   ngOnInit(): void {
@@ -28,6 +28,9 @@ export class AppComponent {
   }
 
   displayOverlay(event) {
+
+    console.log("************************")
+
     const target = document.querySelector("#btn") as HTMLElement;
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
@@ -52,6 +55,10 @@ export class AppComponent {
 
 
   closeOverlay() {
+
+    console.log("closing...")
     this.overlayRef.detach()
+    this.overlayRef.dispose();
+      this.overlayRef = null;
   }
 }

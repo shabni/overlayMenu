@@ -25,10 +25,7 @@ export class OverlayComponent implements OnInit {
 
     console.log("-------------->>>")
     this.searchedItems = ['a','b','c','d','e','f','g','h']
-
     this.subscribeEvents();
-
-
 
   }
 
@@ -44,8 +41,6 @@ export class OverlayComponent implements OnInit {
 
     mouseDownEvents(ev)
     {
-
-
         if (ev.code == 'ArrowDown' && this.searchedItems.length > 0)
         {
 
@@ -63,7 +58,7 @@ export class OverlayComponent implements OnInit {
 
         else if (ev.code == 'Enter')
         {
-            this.onClose(this.searchedItems[this.itemNumber]);
+            // this.onClose(this.searchedItems[this.itemNumber]);
             this.onCloseMenuPanel(this.searchedItems[this.itemNumber])
         }
         else if (ev.code === 'Escape')
@@ -74,7 +69,6 @@ export class OverlayComponent implements OnInit {
 
     selectRow(arrowDirection = 'ArrowDown', makeTransparent = true)
     {
-
         if (makeTransparent) {this.item.nativeElement.children[this.itemNumber].style.backgroundColor = 'transparent';}
 
         if (arrowDirection == 'ArrowUp') {this.itemNumber = this.itemNumber - 1;}
@@ -89,9 +83,6 @@ export class OverlayComponent implements OnInit {
         if (this.itemNumber > -1) this.item.nativeElement.children[this.itemNumber].style.backgroundColor = 'transparent';
         this.itemNumber = index;
         this.item.nativeElement.children[this.itemNumber].style.backgroundColor = '#474747';
-
-        
-
         this.onCloseMenuPanel(this.searchedItems[index])
     }
 
@@ -102,6 +93,7 @@ export class OverlayComponent implements OnInit {
   onCloseMenuPanel(data){
 
     this.overlayMenu.onClosePanel(data);
+    this.onClose();
   }
 
 
@@ -110,8 +102,5 @@ export class OverlayComponent implements OnInit {
       this.subscription.unsubscribe();
       // this.dialogRef.close(data);
   }
-
-
-  
 
 }
