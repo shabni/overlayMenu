@@ -1,0 +1,7 @@
+<div  #item style="width: 100px; height:200px; background-color: red; display: flex; flex-direction: column;" >
+
+    <ng-container *ngFor="let item of searchedItems; let index = index" >
+        <span (click)="onRowClick(index)">{{item}}</span>
+    </ng-container>
+
+</div>
