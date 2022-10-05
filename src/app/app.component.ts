@@ -22,9 +22,6 @@ export class AppComponent {
 
     this.closeOverlay()
    })
-
-   
-
   }
 
   displayOverlay(event) {
@@ -50,6 +47,7 @@ export class AppComponent {
     });
     const component = new ComponentPortal(OverlayComponent);
     const componentRef = this.overlayRef.attach(component);
+    componentRef.instance.searchedItems = ['a','b','c','d','e','f','g','h','i']
     this.overlayRef.backdropClick().subscribe(() => this.overlayRef.detach());
   }
 
@@ -57,8 +55,8 @@ export class AppComponent {
   closeOverlay() {
 
     console.log("closing...")
-    this.overlayRef.detach()
+    this.overlayRef.detach();
     this.overlayRef.dispose();
-      this.overlayRef = null;
+    this.overlayRef = null;
   }
 }

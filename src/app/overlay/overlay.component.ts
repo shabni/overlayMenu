@@ -24,7 +24,7 @@ export class OverlayComponent implements OnInit {
   ngOnInit(): void {
 
     console.log("-------------->>>")
-    this.searchedItems = ['a','b','c','d','e','f','g','h']
+    // this.searchedItems = ['a','b','c','d','e','f','g','h']
     this.subscribeEvents();
 
   }
