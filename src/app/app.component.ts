@@ -1,6 +1,7 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { OverlayMenuService } from './overlay-menu.service';
 import { OverlayComponent } from './overlay/overlay.component';
 
@@ -14,19 +15,27 @@ export class AppComponent {
 
   overlayRef: OverlayRef | null;
 
+  search = new FormControl('');
+
 
   ngOnInit(): void {
 
    this.overlayMenu.signal.subscribe(data=>{
-    console.log("---", data)
 
+    if (data) this.search.setValue(data)
     this.closeOverlay()
+   })
+
+   this.search.valueChanges.subscribe(val=>{
+
+    if (val.length>2 ) {
+      if (this.overlayRef) this.closeOverlay();
+      this.displayOverlay();
+    }
    })
   }
 
-  displayOverlay(event) {
-
-    console.log("************************")
+  displayOverlay() {
 
     const target = document.querySelector("#btn") as HTMLElement;
     this.overlayRef = this.overlay.create({
@@ -47,14 +56,15 @@ export class AppComponent {
     });
     const component = new ComponentPortal(OverlayComponent);
     const componentRef = this.overlayRef.attach(component);
-    componentRef.instance.searchedItems = ['a','b','c','d','e','f','g','h','i']
-    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.detach());
+    componentRef.instance.searchedItems = ['a','bc','def','ghij','klmnp','pqrstu','vwxyzz','hgdsag','fdgdfsi']
+    this.overlayRef.backdropClick().subscribe(() => {
+      this.overlayRef.detach()
+      this.search.setValue('') });
   }
 
 
   closeOverlay() {
 
-    console.log("closing...")
     this.overlayRef.detach();
     this.overlayRef.dispose();
     this.overlayRef = null;

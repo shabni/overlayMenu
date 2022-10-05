@@ -23,10 +23,7 @@ export class OverlayComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log("-------------->>>")
-    // this.searchedItems = ['a','b','c','d','e','f','g','h']
     this.subscribeEvents();
-
   }
 
 
@@ -79,7 +76,6 @@ export class OverlayComponent implements OnInit {
 
     onRowClick(index)
     {
-
         if (this.itemNumber > -1) this.item.nativeElement.children[this.itemNumber].style.backgroundColor = 'transparent';
         this.itemNumber = index;
         this.item.nativeElement.children[this.itemNumber].style.backgroundColor = '#474747';
@@ -87,7 +83,7 @@ export class OverlayComponent implements OnInit {
     }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
   onCloseMenuPanel(data){
@@ -100,7 +96,6 @@ export class OverlayComponent implements OnInit {
   onClose(data = null)
   {
       this.subscription.unsubscribe();
-      // this.dialogRef.close(data);
   }
 
 }

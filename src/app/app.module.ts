@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { OverlayComponent } from './overlay/overlay.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { OverlayComponent } from './overlay/overlay.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    OverlayModule
+    OverlayModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
